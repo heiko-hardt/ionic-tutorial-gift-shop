@@ -40,5 +40,9 @@
 	},
 
 	// Uncomment to connect as root instead. More info: https://aka.ms/dev-containers-non-root.
-	"remoteUser": "developer"
+	"remoteUser": "developer",
+	"remoteEnv": {
+		"PROMPT_COMMAND": "history -a",
+		"HISTFILE": "${containerWorkspaceFolder}/.run/history/.bash_history"
+	}
 }

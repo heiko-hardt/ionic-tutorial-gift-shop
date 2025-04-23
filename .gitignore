@@ -1,0 +1,5 @@
+/.archive/
+/.run/*
+!/.run/history
+/.run/history/*
+!/.run/history/.gitkeep
