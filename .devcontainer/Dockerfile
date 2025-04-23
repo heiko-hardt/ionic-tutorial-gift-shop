@@ -1,7 +1,7 @@
 FROM ubuntu:22.04
 
 # Common environment variables
-ENV JAVA_HOME=/usr/lib/jvm/java-17-openjdk-amd64
+ENV JAVA_HOME=/usr/lib/jvm/java-21-openjdk-amd64
 
 # Locals & Timezone
 RUN apt-get update \
@@ -27,7 +27,7 @@ RUN apt-get update \
         make \
         maven \
         mc \
-        openjdk-17-jdk-headless \
+        openjdk-21-jdk-headless \
         psmisc \
         python3-pip \
         sudo \
