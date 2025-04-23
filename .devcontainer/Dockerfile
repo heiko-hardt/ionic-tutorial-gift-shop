@@ -1,5 +1,8 @@
 FROM ubuntu:22.04
 
+# Common environment variables
+ENV JAVA_HOME=/usr/lib/jvm/java-17-openjdk-amd64
+
 # Locals & Timezone
 RUN apt-get update \
     && apt-get install -y --no-install-recommends \
@@ -13,9 +16,7 @@ RUN apt-get update \
     && dpkg-reconfigure -f noninteractive tzdata
 
 # Libraries
-###################################################################################################
-RUN curl -fsSL https://deb.nodesource.com/setup_22.x | bash - \
-    && apt-get update \
+RUN apt-get update \
     && apt-get install -y --no-install-recommends \
         ant \
         curl \
@@ -23,9 +24,9 @@ RUN curl -fsSL https://deb.nodesource.com/setup_22.x | bash - \
         git \
         gnupg2 \
         gradle \
+        make \
         maven \
         mc \
-        nodejs \
         openjdk-17-jdk-headless \
         psmisc \
         python3-pip \
@@ -38,10 +39,15 @@ RUN curl -fsSL https://deb.nodesource.com/setup_22.x | bash - \
     && rm -rf /var/lib/apt/lists/* \
     && chsh -s $(which zsh)
 
-ENV JAVA_HOME=/usr/lib/jvm/java-17-openjdk-amd64
+# NodeJs based on: https://github.com/nodesource/distributions
+RUN curl -fsSL https://deb.nodesource.com/setup_22.x -o nodesource_setup.sh \
+    && bash nodesource_setup.sh \
+    && rm nodesource_setup.sh \
+    && apt-get install -y \
+        nodejs \
+    && rm -rf /var/lib/apt/lists/*
 
 # System User
-###################################################################################################
 ARG USERNAME=developer
 ARG USER_UID=1000
 ARG USER_GID=$USER_UID
@@ -57,7 +63,7 @@ RUN groupadd --gid $USER_GID $USERNAME \
 
 USER $USERNAME
 
-# https://developer.android.com/studio/#downloads
+# Android SDK (https://developer.android.com/studio/#downloads)
 ENV ANDROID_SDK_URL="https://dl.google.com/android/repository/commandlinetools-linux-11076708_latest.zip" \
     ANDROID_BUILD_TOOLS_VERSION=34.0.0 \
     ANDROID_SDK_ROOT="/opt/android" \
@@ -82,5 +88,6 @@ RUN mkdir /home/developer/.android \
     && sdkmanager "platform-tools" \
     && sdkmanager "build-tools;34.0.0"
 
+# Oh-my-zsh & Ionic
 RUN sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)" --unattended \
     && sudo npm install -g @ionic/cli
