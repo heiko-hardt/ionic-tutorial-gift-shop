@@ -2,7 +2,10 @@ FROM ubuntu:22.04
 
 # Locals & Timezone
 RUN apt-get update \
-    && apt-get install -y --no-install-recommends locales locales-all tzdata \
+    && apt-get install -y --no-install-recommends \
+        locales \
+        locales-all \
+        tzdata \
     && rm -rf /var/lib/apt/lists/* \
     && echo "Europe/Berlin" > /etc/timezone \
     && rm -f /etc/localtime \
@@ -12,7 +15,8 @@ RUN apt-get update \
 # Libraries
 ###################################################################################################
 RUN curl -fsSL https://deb.nodesource.com/setup_22.x | bash - \
-    && apt-get install -y \
+    && apt-get update \
+    && apt-get install -y --no-install-recommends \
         ant \
         curl \
         debconf-utils \
@@ -31,6 +35,7 @@ RUN curl -fsSL https://deb.nodesource.com/setup_22.x | bash - \
         vim \
         wget \
         zsh \
+    && rm -rf /var/lib/apt/lists/* \
     && chsh -s $(which zsh)
 
 ENV JAVA_HOME=/usr/lib/jvm/java-17-openjdk-amd64
@@ -44,7 +49,9 @@ ARG USER_GID=$USER_UID
 RUN groupadd --gid $USER_GID $USERNAME \
     && useradd --uid $USER_UID --gid $USER_GID --shell $(which zsh) -m $USERNAME \
     && apt-get update \
-    && apt-get install -y sudo \
+    && apt-get install -y --no-install-recommends \
+        sudo \
+    && rm -rf /var/lib/apt/lists/* \
     && echo $USERNAME ALL=\(root\) NOPASSWD:ALL > /etc/sudoers.d/$USERNAME \
     && chmod 0440 /etc/sudoers.d/$USERNAME
 
