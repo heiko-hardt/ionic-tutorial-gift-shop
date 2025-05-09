@@ -2,14 +2,10 @@
 // README at: https://github.com/devcontainers/templates/tree/main/src/ubuntu
 {
 	// "name": "Ubuntu",
-	"name": "NodeJS environment",
+	"name": "Ionic environment based in Node.js 22 and Java 21",
 
 	// Or use a Dockerfile or Docker Compose file. More info: https://containers.dev/guide/dockerfile
-	// "image": "mcr.microsoft.com/devcontainers/base:jammy",
-	"build": {
-        // Path is relative to the devcontainer.json file.
-        "dockerfile": "Dockerfile"
-    },
+	"image": "hhdev/ionic:7.2-njs22-jvm21",
 
 	// Features to add to the dev container. More info: https://containers.dev/features.
 	// "features": {},
