@@ -1,11 +1,38 @@
-import { Component } from '@angular/core';
-import { IonHeader, IonToolbar, IonTitle, IonContent } from '@ionic/angular/standalone';
+import { Component, inject } from '@angular/core';
+import {
+  IonHeader,
+  IonToolbar,
+  IonTitle,
+  IonContent,
+  IonThumbnail,
+  IonRow,
+  IonCol,
+  IonImg,
+  IonCard,
+  IonLabel,
+  IonText,
+  IonIcon,
+} from '@ionic/angular/standalone';
+import { ApiService } from '../services/api/api.service';
 
 @Component({
   selector: 'app-home',
   templateUrl: 'home.page.html',
   styleUrls: ['home.page.scss'],
-  imports: [IonHeader, IonToolbar, IonTitle, IonContent],
+  imports: [
+    IonIcon,
+    IonText,
+    IonLabel,
+    IonCard,
+    IonImg,
+    IonCol,
+    IonRow,
+    IonHeader,
+    IonToolbar,
+    IonTitle,
+    IonContent,
+    IonThumbnail,
+  ],
 })
 export class HomePage {
   items: any[] = [];
