@@ -1,13 +1,9 @@
-<ion-header [translucent]="true">
-  <ion-toolbar>
-    <ion-title>item-detail</ion-title>
-  </ion-toolbar>
-</ion-header>
-
 <ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
+  <ion-header slot="fixed" class="ion-no-border">
     <ion-toolbar>
-      <ion-title size="large">item-detail</ion-title>
+      <ion-buttons slot="start" mode="md">
+        <ion-back-button defaultHref="/home" color="dark"></ion-back-button>
+      </ion-buttons>
     </ion-toolbar>
   </ion-header>
 </ion-content>
