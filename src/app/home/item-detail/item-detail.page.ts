@@ -42,6 +42,7 @@ import { ApiService } from 'src/app/services/api/api.service';
 export class ItemDetailPage implements OnInit {
   id!: string;
   item: any;
+  addToBag!: any;
   private route = inject(ActivatedRoute);
   private navCtrl = inject(NavController);
   private api = inject(ApiService);
@@ -61,5 +62,16 @@ export class ItemDetailPage implements OnInit {
     this.id = id;
     this.item = this.api.items.find((record) => record.id == id);
     console.log('this.item: %o', this.item);
+  }
+
+  addItem() {
+    this.addedText();
+  }
+
+  addedText() {
+    this.addToBag = 'Added to Bag';
+    setTimeout(() => {
+      this.addToBag = null;
+    }, 1000);
   }
 }
