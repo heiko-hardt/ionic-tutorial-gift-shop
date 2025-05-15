@@ -7,6 +7,10 @@ import {
   IonToolbar,
   IonButtons,
   IonBackButton,
+  IonIcon,
+  IonItem,
+  IonLabel,
+  IonText,
 } from '@ionic/angular/standalone';
 import { ActivatedRoute } from '@angular/router';
 import { NavController } from '@ionic/angular/standalone';
@@ -18,6 +22,10 @@ import { ApiService } from 'src/app/services/api/api.service';
   styleUrls: ['./item-detail.page.scss'],
   standalone: true,
   imports: [
+    IonText,
+    IonLabel,
+    IonItem,
+    IonIcon,
     IonBackButton,
     IonButtons,
     IonContent,

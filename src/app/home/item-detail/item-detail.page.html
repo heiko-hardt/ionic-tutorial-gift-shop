@@ -2,8 +2,28 @@
   <ion-header slot="fixed" class="ion-no-border">
     <ion-toolbar>
       <ion-buttons slot="start" mode="md">
-        <ion-back-button defaultHref="/home" color="dark"></ion-back-button>
+        <ion-back-button defaultHref="/home" color="light"></ion-back-button>
       </ion-buttons>
     </ion-toolbar>
   </ion-header>
+
+  <div [style.backgroundImage]="'url(' + item?.cover + ')'" class="bg">
+    <div class="rating" align="center">
+      <ion-icon name="star" color="warning"></ion-icon>
+      {{item?.rating}}
+    </div>
+  </div>
+
+  <ion-item lines="none">
+    <ion-label>
+      {{item?.name | uppercase}}
+      <p class="desc">{{item?.description}}</p>
+      <p>
+        <ion-text color="medium">MRP</ion-text>
+        <ion-text color="dark" class="price">
+          $<span>{{item?.price}}</span>
+        </ion-text>
+      </p>
+    </ion-label>
+  </ion-item>
 </ion-content>
