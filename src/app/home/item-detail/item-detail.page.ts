@@ -11,6 +11,8 @@ import {
   IonItem,
   IonLabel,
   IonText,
+  IonFooter,
+  IonButton,
 } from '@ionic/angular/standalone';
 import { ActivatedRoute } from '@angular/router';
 import { NavController } from '@ionic/angular/standalone';
@@ -22,6 +24,8 @@ import { ApiService } from 'src/app/services/api/api.service';
   styleUrls: ['./item-detail.page.scss'],
   standalone: true,
   imports: [
+    IonButton,
+    IonFooter,
     IonText,
     IonLabel,
     IonItem,
