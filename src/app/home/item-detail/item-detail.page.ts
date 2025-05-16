@@ -15,7 +15,7 @@ import {
   IonButton,
   IonBadge,
 } from '@ionic/angular/standalone';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, RouterLink } from '@angular/router';
 import { NavController } from '@ionic/angular/standalone';
 import { ApiService } from 'src/app/services/api/api.service';
 import { CartService } from 'src/app/services/cart/cart.service';
@@ -41,6 +41,7 @@ import { Subscription } from 'rxjs';
     IonToolbar,
     CommonModule,
     FormsModule,
+    RouterLink,
   ],
 })
 export class ItemDetailPage implements OnInit, OnDestroy {
