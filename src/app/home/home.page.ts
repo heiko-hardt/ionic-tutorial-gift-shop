@@ -1,4 +1,4 @@
-import { Component, inject } from '@angular/core';
+import { Component, inject, OnDestroy, OnInit } from '@angular/core';
 import {
   IonHeader,
   IonToolbar,
@@ -13,15 +13,23 @@ import {
   IonText,
   IonIcon,
   IonSearchbar,
+  IonButtons,
+  IonButton,
+  IonBadge,
 } from '@ionic/angular/standalone';
 import { ApiService } from '../services/api/api.service';
 import { RouterLink } from '@angular/router';
+import { CartService } from '../services/cart/cart.service';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-home',
   templateUrl: 'home.page.html',
   styleUrls: ['home.page.scss'],
   imports: [
+    IonBadge,
+    IonButton,
+    IonButtons,
     IonSearchbar,
     IonIcon,
     IonText,
@@ -35,24 +43,33 @@ import { RouterLink } from '@angular/router';
     IonTitle,
     IonContent,
     IonThumbnail,
-    RouterLink
+    RouterLink,
   ],
 })
-export class HomePage {
+export class HomePage implements OnInit, OnDestroy {
   items: any[] = [];
   allItems: any[] = [];
   query!: string;
+  totalItems = 0;
+  cartSub!: Subscription;
 
   private api = inject(ApiService);
+  public cartService = inject(CartService);
 
   constructor() {}
 
   ngOnInit() {
     console.log('ngOnInit ()');
-    this.getItem();
+    this.getItems();
+
+    this.cartSub = this.cartService.cart.subscribe({
+      next: (cart) => {
+        this.totalItems = cart ? cart?.totalItem : 0;
+      },
+    });
   }
 
-  getItem() {
+  getItems() {
     this.allItems = this.api.items;
     this.items = [...this.allItems];
   }
@@ -74,6 +91,11 @@ export class HomePage {
 
   searchItems() {
     this.items = this.api.items.filter((item) =>
-      item.name.toLowerCase().includes(this.query));
+      item.name.toLowerCase().includes(this.query)
+    );
+  }
+
+  ngOnDestroy(): void {
+    if (this.cartSub) this.cartSub.unsubscribe();
   }
 }

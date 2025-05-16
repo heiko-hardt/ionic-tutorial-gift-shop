@@ -56,3 +56,15 @@ ion-item {
     }
   }
 }
+
+ion-footer {
+  ion-button {
+    ion-text {
+      font-size: 1.1rem;
+    }
+    ion-icon {
+      font-size: 1.5rem;
+      margin-right: 10px;
+    }
+  }
+}
